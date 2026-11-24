@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semblance Portraits | Puncture The Screen 2026</title>
+<meta name="description" content="Semblance Portraits: participatory digital portraits created from personal questionnaires.">
+<style>
+:root{--ink:#141414;--soft:#5c5c5c;--rule:#d9d9d9;--blush:#f3d6ef}
+*{box-sizing:border-box}
+html{background:#fff}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:300;font-size:1.05rem;line-height:1.65}
+:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:0}
+
+header{text-align:center;padding:3rem 1.25rem 0}
+h1{margin:0}
+.logo{display:block;position:relative;overflow:hidden;width:min(100%,46rem);aspect-ratio:2.6/1;margin:0 auto}
+.logo img{position:absolute;width:160%;left:-30%;top:50%;transform:translateY(-49.2%)}
+.statement{max-width:36rem;margin:1.5rem auto 0;color:var(--soft)}
+
+main{max-width:78rem;margin:0 auto;padding:4rem 1.5rem 3rem}
+.wall{list-style:none;margin:0;padding:0;display:grid;gap:4.5rem 3.5rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));align-items:start}
+@media (min-width:62rem){.wall li:nth-child(2){margin-top:5rem}}
+
+figure{margin:0}
+.frame{display:block;width:100%;padding:0;border:0;background:#fff;cursor:zoom-in;box-shadow:0 1px 2px rgba(0,0,0,.12),0 14px 38px rgba(0,0,0,.09);transition:box-shadow .5s ease}
+.frame:hover{box-shadow:0 2px 4px rgba(0,0,0,.14),0 22px 50px rgba(0,0,0,.14)}
+.frame img{display:block;width:100%;height:auto;aspect-ratio:5/7;object-fit:cover}
+
+figcaption{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.name{margin:0;font-size:1.15rem;font-weight:400;letter-spacing:.01em}
+blockquote{margin:.9rem 0 .6rem;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-style:italic;font-size:1rem;line-height:1.6}
+.when{margin:0;color:var(--soft);font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.85rem}
+.when time{background:linear-gradient(transparent 62%,var(--blush) 62%)}
+
+footer{text-align:center;color:var(--soft);font-size:.95rem;padding:2rem 1rem 3.5rem;border-top:1px solid var(--rule);max-width:78rem;margin:0 auto}
+
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;overflow:visible}
+dialog::backdrop{background:rgba(255,255,255,.96)}
+dialog img{display:block;max-width:min(94vw,60rem);max-height:86vh;width:auto;height:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+dialog button{display:block;margin:0 0 .75rem auto;font:inherit;background:#fff;color:var(--ink);border:1px solid var(--ink);padding:.4rem 1rem;cursor:pointer}
+dialog button:hover{background:var(--ink);color:#fff}
+
+@media (prefers-reduced-motion:no-preference){
+ .wall li{animation:hang 1.4s ease both}
+ .wall li:nth-child(2){animation-delay:.25s}
+ .wall li:nth-child(3){animation-delay:.5s}
+ @keyframes hang{from{opacity:0}to{opacity:1}}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the portraits</a>
+
+<header>
+  <h1><span class="logo"><img src="img/logo.jpg" alt="Semblance Portraits" width="1200" height="1200"></span></h1>
+  <p class="statement">A series of participatory digital portraits created from personal questionnaires. Through texture, collage, typography and abstraction, each artwork reflects the participant’s relationship with identity, consumption, contradiction and the systems they inhabit.</p>
+</header>
+
+<main id="main">
+  <ul class="wall" aria-label="The three portraits">
+    <li>
+      <figure>
+        <button class="frame" type="button" data-full="img/tyler.jpg" data-alt="Collage portrait of Tyler: a neon-lit Tokyo street at night overlaid with tomatoes, rolls of toilet paper, a fuel pump nozzle and handwritten notes including “I really miss my freedom” and “Pumpkin spice latte… mmm…”." aria-label="View Tyler’s portrait larger">
+          <img src="img/tyler-sm.jpg" alt="Collage portrait of Tyler: a neon-lit Tokyo street at night overlaid with tomatoes, rolls of toilet paper, a fuel pump nozzle and handwritten notes including “I really miss my freedom” and “Pumpkin spice latte… mmm…”." width="700" height="984" loading="lazy">
+        </button>
+        <figcaption>
+          <p class="name">Tyler</p>
+          <blockquote>I can be as insane as I want to be.</blockquote>
+          <p class="when"><time datetime="2026-10-23T23:06:50">23/10/2026 23:06:50</time></p>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <button class="frame" type="button" data-full="img/triz.jpg" data-alt="Collage portrait of Triz: bunches of bananas in saturated yellow and red, pink cat-eye sunglasses, a cat’s ears, and handwritten notes including “My bird (Green, he’s a parakeet)”, “Chocolate Milk” and “11:11 AM (wow)”." aria-label="View Triz’s portrait larger">
+          <img src="img/triz-sm.jpg" alt="Collage portrait of Triz: bunches of bananas in saturated yellow and red, pink cat-eye sunglasses, a cat’s ears, and handwritten notes including “My bird (Green, he’s a parakeet)”, “Chocolate Milk” and “11:11 AM (wow)”." width="700" height="984" loading="lazy">
+        </button>
+        <figcaption>
+          <p class="name">Triz</p>
+          <blockquote>i feel like a wet seed</blockquote>
+          <p class="when"><time datetime="2026-10-31T14:29:19">31/10/2026 14:29:19</time></p>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <button class="frame" type="button" data-full="img/geo.jpg" data-alt="Collage portrait of GeO: a grey, faded lakeside decking with a stool and laptop keyboard, a map, three bicycle wheels in green and red, a surfboard, a Liverpool Street sign, and handwritten notes “Aperol Spritz” and “Surfing 9.30 am”." aria-label="View GeO’s portrait larger">
+          <img src="img/geo-sm.jpg" alt="Collage portrait of GeO: a grey, faded lakeside decking with a stool and laptop keyboard, a map, three bicycle wheels in green and red, a surfboard, a Liverpool Street sign, and handwritten notes “Aperol Spritz” and “Surfing 9.30 am”." width="700" height="984" loading="lazy">
+        </button>
+        <figcaption>
+          <p class="name">GeO</p>
+          <blockquote>Nationality! I mean what does that really help us with…</blockquote>
+          <p class="when"><time datetime="2026-10-25T09:48:32">25/10/2026 09:48:32</time></p>
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+</main>
+
+<footer>Part of Puncture The Screen 2026</footer>
+
+<dialog id="zoom" aria-label="Portrait, enlarged">
+  <button type="button" id="close">Close</button>
+  <img id="zoomimg" src="" alt="">
+</dialog>
+
+<script>
+const dlg=document.getElementById("zoom"), zi=document.getElementById("zoomimg");
+let opener=null;
+document.querySelectorAll(".frame").forEach(b=>b.addEventListener("click",()=>{
+  opener=b; zi.src=b.dataset.full; zi.alt=b.dataset.alt; dlg.showModal();
+}));
+document.getElementById("close").addEventListener("click",()=>dlg.close());
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+dlg.addEventListener("close",()=>{zi.removeAttribute("src"); if(opener)opener.focus()});
+</script>
+</body>
+</html>
