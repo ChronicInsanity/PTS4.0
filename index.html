@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puncture The Screen 2026</title>
+<meta name="description" content="Puncture The Screen 2026: a digital and data driven arts festival. Enter the online artworks and experiences from this page.">
+<style>
+:root{--g:#00ff41;--k:#000;--w:#fff;--c:#0ff;--m:#f0f;--y:#ff0;--dim:#b8b8b8}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--k);color:var(--w);font-family:"Times New Roman",Times,serif;font-size:1.2rem;line-height:1.55}
+a{color:var(--g)}
+:focus-visible{outline:3px solid var(--y);outline-offset:3px}
+
+/* white noise + scanlines (decorative, hidden from assistive tech, switched off for reduced motion) */
+.noise,.scan{position:fixed;inset:0;pointer-events:none;z-index:50}
+.noise{opacity:.09;mix-blend-mode:screen;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:hiss .4s steps(4) infinite}
+.scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px)}
+@keyframes hiss{0%{background-position:0 0}25%{background-position:-70px 40px}50%{background-position:50px -90px}75%{background-position:-30px -20px}100%{background-position:90px 60px}}
+
+.skip{position:absolute;left:-999px;top:0;background:var(--y);color:var(--k);padding:.5rem 1rem;z-index:100}
+.skip:focus{left:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* chromatic aberration + glitch */
+.ca{text-shadow:-2px 0 var(--c),2px 0 var(--m)}
+h1{font-size:clamp(2.6rem,9vw,6rem);line-height:1;margin:0 0 .4rem;color:var(--w);font-weight:700;letter-spacing:-.02em;animation:glitch 5s steps(1) infinite}
+@keyframes glitch{
+0%,91%,100%{transform:none;clip-path:none;text-shadow:-3px 0 var(--c),3px 0 var(--m)}
+92%{transform:translate(-6px,1px) skewX(10deg);text-shadow:-9px 0 var(--c),9px 0 var(--y);color:var(--g)}
+93%{transform:translate(5px,-2px);clip-path:inset(35% 0 38% 0);text-shadow:7px 0 var(--m),-7px 0 var(--c)}
+94%{transform:none;clip-path:inset(0 0 60% 0);text-shadow:-4px 0 var(--y),4px 0 var(--c)}
+96%{transform:translate(3px,0) skewX(-6deg);clip-path:none;color:var(--w)}}
+
+header,main,footer{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+header{padding-top:2.5rem}
+.tag{color:var(--g);font-size:1.4rem;margin:0 0 1.25rem}
+.intro{max-width:44rem}
+.pass{display:inline-block;margin:.5rem 0 1rem;padding:.5rem 1rem;border:2px solid var(--g);color:var(--g);text-decoration:none;font-weight:700}
+.pass:hover{background:var(--g);color:var(--k)}
+
+h2.sec{font-size:2rem;border-bottom:2px solid var(--g);padding-bottom:.3rem;margin:2.5rem 0 1rem;color:var(--g)}
+.grid{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr))}
+.card{border:2px solid var(--w);padding:1.1rem;height:100%;display:flex;flex-direction:column;position:relative;background:var(--k)}
+.card:hover{border-color:var(--g);box-shadow:-4px 0 0 var(--c),4px 0 0 var(--m)}
+.card h3{font-size:1.5rem;line-height:1.2;margin:0}
+.by{margin:.2rem 0 .8rem;color:var(--dim)}
+.card p.d{margin:0 0 1rem;font-size:1.05rem}
+.where{margin:auto 0 .8rem;font-size:1rem;color:var(--y)}
+.btn{font:inherit;font-weight:700;cursor:pointer;background:var(--k);color:var(--g);border:2px solid var(--g);padding:.55rem 1rem;text-align:left}
+.btn:hover:not(:disabled){background:var(--g);color:var(--k)}
+.btn:disabled{color:var(--dim);border-color:var(--dim);border-style:dashed;cursor:not-allowed}
+.note{border-left:4px solid var(--c);padding-left:1rem;max-width:44rem}
+footer{padding-top:3rem;padding-bottom:3rem;color:var(--dim);font-size:1rem}
+
+/* the frame */
+#viewer{display:flex;flex-direction:column;height:100vh;height:100dvh;padding:.6rem;gap:.6rem}
+#viewer[hidden],#hub[hidden]{display:none}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem;border:2px solid var(--g);padding:.5rem .75rem}
+.bar h2{margin:0;font-size:1.3rem;flex:1 1 12rem;color:var(--w)}
+.bar h2:focus{outline:none}
+.bar .alt{font-size:1rem}
+.screen{position:relative;flex:1;border:2px solid var(--g);box-shadow:-4px 0 0 var(--c),4px 0 0 var(--m);background:var(--k);min-height:0}
+.screen .load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--g);padding:1rem}
+.screen iframe{position:relative;width:100%;height:100%;border:0;background:#fff;display:block}
+
+@media (prefers-reduced-motion:reduce){.noise{animation:none}h1{animation:none}}
+@media (forced-colors:active){.noise,.scan{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the list of works</a>
+<div class="noise" aria-hidden="true"></div>
+<div class="scan" aria-hidden="true"></div>
+<div id="status" class="sr" role="status" aria-live="polite"></div>
+
+<div id="hub">
+<header>
+  <h1>Puncture The Screen 2026</h1>
+  <p class="tag ca">A digital and data driven arts festival</p>
+  <p class="intro">Immersive theatre, interactive experiences, visual art, sculpture and web-based artwork. Each artwork is made from data drawn from public sources, the artist’s own life, or you, as you interact with it.</p>
+  <p class="intro">All exhibited work takes place in and around Broadway Cinema, Nottingham, and most of it is also online. Choose a work below to enter it without leaving this page.</p>
+  <a class="pass" href="https://www.eventbrite.co.uk/e/1999202598790?aff=oddtdtcreator" target="_blank" rel="noopener">Book a Festival Pass (opens in a new tab)</a>
+</header>
+<main id="main" tabindex="-1">
+  <h2 class="sec">Online works</h2>
+  <ul class="grid" id="online"></ul>
+  <h2 class="sec">In person only</h2>
+  <p class="note">These works can only be experienced at Broadway Cinema and around Nottingham for the duration of the festival.</p>
+  <ul class="grid" id="inperson"></ul>
+  <h2 class="sec">Workshops</h2>
+  <p class="note">Joe Strickland is running a series of workshops: Introduction to Digital Dramaturgy; How to centre Sustainability in your practice; and Everything you need to know to either use or avoid AI as an artist.</p>
+</main>
+<footer>&copy;2026 Chronic Insanity</footer>
+</div>
+
+<section id="viewer" hidden aria-label="Artwork viewer">
+  <div class="bar">
+    <button class="btn" id="back" type="button">Back to all works</button>
+    <h2 id="vtitle" tabindex="-1"></h2>
+    <a class="alt" id="alt" href="#" target="_blank" rel="noopener">Not loading? Open in a new tab</a>
+  </div>
+  <div class="screen">
+    <div class="load" id="load" aria-hidden="true">Signal acquiring… if nothing appears, this work may not allow framing: use the new tab link above.</div>
+    <iframe id="frame" title="" allow="fullscreen; autoplay; camera; microphone; geolocation; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-modals allow-downloads"></iframe>
+  </div>
+</section>
+
+<script>
+/* ==========================================================
+   EDIT HERE. Paste each work's live address into "url".
+   Leave url as "" until it is ready (the button shows as
+   "Coming soon"). online:false = in person only.
+   ========================================================== */
+const WORKS = [
+ {id:"sweat-tears-sea", title:"Sweat, Tears and The Sea", by:"Ellie Harrison", online:true, url:"",
+  desc:"As a disabled theatre performer I can no longer tour. How can I adapt my skills to digital performance, that is accessible to disabled performers and audience alike? Sweat, Tears and The Sea uses archive footage shot by my grandpa to explore intergenerational trauma and how it can lay the foundations for Innovation."},
+ {id:"lonely-garden", title:"The Lonely Garden", by:"Lauren Brady", online:true, url:"",
+  desc:"The planet is dying, and so are we. The Lonely Garden sets you on a path of restoration for yourself and your garden. Tailored to your space and capacity, the website will help you create a garden through a city-wide, where you will meet like-minded people along the way."},
+ {id:"dia-protocol", title:"D.I.A Protocol", by:"But Why?", online:true, url:"",
+  desc:"An alternate reality game where audiences uncover competing futures shaped by disability storytelling, corporate extraction, and collective care. Through puzzles, staged institutions, and participatory fiction, players must decide how stories are used, owned, and protected in a collapsing quantum “future communication” system. Played both from home and live with intertwining narratives."},
+ {id:"semblance-portrait", title:"Semblance Portrait", by:"Maisie Shiplee", online:true, url:"",
+  desc:"Semblance Portraits is a series of participatory digital portraits created from personal questionnaires. Through texture, collage, typography and abstraction, each artwork reflects the participant’s relationship with identity, consumption, contradiction and the systems they inhabit, inviting reflection on the often invisible forces that shape everyday life."},
+ {id:"sharika-law", title:"Sharika Law", by:"Noor Sobka", online:true, url:"",
+  desc:"A film project created by collating data/the plot from social media comments. The premise of the film Sharika Law will be that Sharika global, latin superstar has decided to pivot into politics but has realised the only way break through the algorithm and go viral is to go down the “Pink Pill” route."},
+ {id:"malper", title:"MALPER", by:"Rachel Parry", online:true, url:"",
+  desc:"Weird and wonky web-based, interactive clickable experience, using the artists’ personal data from their project “MALFUNCTIONING PERFECTLY”. Rachel Parry and Creative Technologist Rachel Smith have been teaching the A.I bots about liveness from a Neurodivergent/disabled point-of-view. Resulting in a playful but often disastrous choice-driven uncanny experience that devolves into chaos."},
+ {id:"milk-teeth", title:"Milk Teeth", by:"Hannah Raymond-Cox", online:true, url:"",
+  desc:"This linear interactive poem is about losing front teeth and innocence, and gaining the children’s book Heidi and queerness. I hope you find it bittersweet."},
+ {id:"cultural-stories", title:"Cultural sTorIES", by:"Chronic Insanity", online:true, url:"",
+  desc:"This video/spoken word series, inspired by a collection of ties designed by famous modern artists, looks at the found poetry that can emanate from the flowery words written about, and by, different visual art forms."},
+ {id:"paint-by-numbers", title:"Paint By Numbers", by:"Joe Strickland", online:true, url:"",
+  desc:"This series of paintings encodes benign everyday activities, observed without participant awareness, into an abstract series of colours and shapes that, on close and careful inspection, can be used to divine the events observed in spite of their seemingly ambiguous recording. An artwork that examines how anonymised our personal data can possibly be in a modern data driven society."},
+ {id:"all-roads-roe", title:"All Roads Lead To Roe", by:"RoeMan", online:false,
+  desc:"This street art intervention uses stylised micro-sculptures of invertebrate eggs, clutching to abandoned buildings that once provided public services, in order to comment on vanishing third spaces and the lack of public infrastructure in modern cities."},
+ {id:"handworked", title:"Handworked", by:"Laurie Owen", online:false,
+  desc:"Imagine a world of computers without Microsoft, Google and Apple. That world has quietly existed, since the 1970s. So what’s stopping us living there today? Handworked is an interactive installation that opens a door into the life of a character, who lives in the parallel world of decentralised technology."},
+ {id:"ghosts-mothers", title:"Ghosts of Our Mothers", by:"Lizzy Tan & Lois Liao", online:false,
+  desc:"In a time we are increasingly asking what can be automated and what shouldn’t, what happens when care work becomes data? By choreographically extracting and, in parallel, algorithmically recreating movement from cinematic portrayals of motherhood, Ghosts of Our Mothers is a film installation that probes the line between the performance and reality of intangible care work."},
+ {id:"next-doors-telly", title:"Next Door’s Telly Has Games On", by:"Amy Godliman", online:false,
+  desc:"In this miniature living room set in Britain in 1982, two Atari style games are housed in a vintage dolls house television. You play tennis and fishing against your unseen neighbour in an unfamiliar but comfortable setting, your feet digging into the carpet and eyes drifting to the scattered magazines and décor."}
+];
+
+const $ = id => document.getElementById(id);
+const hub=$("hub"), viewer=$("viewer"), frame=$("frame"), statusEl=$("status");
+let lastOpener=null, cameFromList=false;
+
+function say(t){statusEl.textContent="";setTimeout(()=>statusEl.textContent=t,60)}
+
+/* build the lists */
+WORKS.forEach(w=>{
+  const li=document.createElement("li");
+  const card=document.createElement("article");
+  card.className="card";
+  card.setAttribute("aria-labelledby","t-"+w.id);
+  const h=document.createElement("h3"); h.id="t-"+w.id; h.className="ca"; h.textContent=w.title;
+  const by=document.createElement("p"); by.className="by"; by.textContent="by "+w.by;
+  const d=document.createElement("p"); d.className="d"; d.textContent=w.desc;
+  card.append(h,by,d);
+  if(w.online){
+    const wh=document.createElement("p"); wh.className="where"; wh.textContent="Online and in person";
+    const b=document.createElement("button"); b.type="button"; b.className="btn"; b.id="b-"+w.id;
+    b.setAttribute("aria-describedby","t-"+w.id);
+    if(w.url){b.textContent="Enter "+w.title; b.onclick=()=>{lastOpener=b;location.hash=w.id}}
+    else{b.textContent="Coming soon"; b.disabled=true}
+    card.append(wh,b); $("online").append(li);
+  } else {
+    const wh=document.createElement("p"); wh.className="where"; wh.textContent="In person only";
+    card.append(wh); $("inperson").append(li);
+  }
+  li.append(card);
+});
+
+/* routing by #hash so the browser back button works too */
+function route(){
+  const w=WORKS.find(x=>x.id===location.hash.slice(1) && x.online && x.url);
+  if(w){
+    hub.hidden=true; viewer.hidden=false;
+    $("vtitle").textContent=w.title+" by "+w.by;
+    frame.title=w.title+" by "+w.by+" (embedded artwork)";
+    $("alt").href=w.url;
+    $("alt").setAttribute("aria-label","Not loading? Open "+w.title+" in a new tab");
+    $("load").hidden=false;
+    frame.onload=()=>{$("load").hidden=true};
+    frame.src=w.url;
+    document.title=w.title+" | Puncture The Screen 2026";
+    window.scrollTo(0,0);
+    $("vtitle").focus();
+    say("Opened "+w.title+". Use Back to all works to return.");
+  } else {
+    if(!viewer.hidden){say("Returned to the list of works.")}
+    viewer.hidden=true; hub.hidden=false;
+    frame.onload=null; frame.removeAttribute("src"); /* stops any sound or video */
+    document.title="Puncture The Screen 2026";
+    if(lastOpener){lastOpener.focus();lastOpener=null}
+  }
+}
+$("back").onclick=()=>{ if(cameFromList && history.length>1) history.back(); else location.hash="" };
+window.addEventListener("hashchange",()=>{cameFromList=!!location.hash; route()});
+cameFromList=false; route();
+</script>
+</body>
+</html>
